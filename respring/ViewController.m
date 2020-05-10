@@ -9,19 +9,11 @@
 #import "ViewController.h"
 #import "NSTask.h"
 
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+void killall(const char *name) {
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = @"/bin/ps";
     task.arguments = [NSArray arrayWithObjects:
-                      @"-A",
+                      @"-Ac",
                       nil];
     NSPipe *outputPipe = [NSPipe pipe];
     [task setStandardOutput:outputPipe];
@@ -34,23 +26,34 @@
     NSData *data = [file readDataToEndOfFile];
     NSString *printString = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
 
+    NSMutableArray *listItems = [NSMutableArray array];
     NSString *string = @"";
-    bool lastIsValue = false;
     for (int i = 0; i < printString.length; i++) {
         if ([printString characterAtIndex:i] != ' ' && [printString characterAtIndex:i] != '\n') {
             string = [string stringByAppendingFormat:@"%c", [printString characterAtIndex:i]];
-            lastIsValue = true;
-        } else if (lastIsValue == true) {
-            string = [string stringByAppendingString:@" "];
-            lastIsValue = false;
+        } else if (![string isEqualToString:@""]) {
+            [listItems addObject:string];
+            string = @"";
         }
     }
 
-    NSArray *listItems = [string componentsSeparatedByString:@" "];
+    if ([listItems containsObject:[NSString stringWithFormat:@"%s", name]]) {
+        kill([[listItems objectAtIndex:[listItems indexOfObject:[NSString stringWithFormat:@"%s", name]] - 3] intValue], SIGKILL);
+    }
+    exit(0);
+}
 
-    int SpringBoardPid = [[listItems objectAtIndex:[listItems indexOfObject:@"/System/Library/CoreServices/SpringBoard.app/SpringBoard"] - 3] intValue];
+@interface ViewController ()
 
-    kill(SpringBoardPid, SIGKILL);
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+
+    killall("SpringBoard");
 }
 
 
