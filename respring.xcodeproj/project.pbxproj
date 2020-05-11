@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AA4D15A2468F71E003868A7 /* psychicpaper.py in Resources */ = {isa = PBXBuildFile; fileRef = 2AA4D1592468F71E003868A7 /* psychicpaper.py */; };
 		2AF886042466D15100BD50CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF886032466D15100BD50CF /* AppDelegate.m */; };
 		2AF886072466D15100BD50CF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF886062466D15100BD50CF /* SceneDelegate.m */; };
 		2AF8860A2466D15100BD50CF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF886092466D15100BD50CF /* ViewController.m */; };
@@ -17,7 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2AF885FF2466D15100BD50CF /* kill SB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kill SB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AA4D1592468F71E003868A7 /* psychicpaper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = psychicpaper.py; sourceTree = "<group>"; };
+		2AF885FF2466D15100BD50CF /* kill Process.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kill Process.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF886022466D15100BD50CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2AF886032466D15100BD50CF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2AF886052466D15100BD50CF /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -54,7 +56,7 @@
 		2AF886002466D15100BD50CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2AF885FF2466D15100BD50CF /* kill SB.app */,
+				2AF885FF2466D15100BD50CF /* kill Process.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,6 +76,7 @@
 				2AF886132466D15D00BD50CF /* Info.plist */,
 				2AF886142466D15D00BD50CF /* main.m */,
 				2AF8861B2466D1DF00BD50CF /* NSTask.h */,
+				2AA4D1592468F71E003868A7 /* psychicpaper.py */,
 			);
 			path = respring;
 			sourceTree = "<group>";
@@ -88,6 +91,7 @@
 				2AF885FB2466D15100BD50CF /* Sources */,
 				2AF885FC2466D15100BD50CF /* Frameworks */,
 				2AF885FD2466D15100BD50CF /* Resources */,
+				2AA4D1582468F697003868A7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -95,7 +99,7 @@
 			);
 			name = respring;
 			productName = respring;
-			productReference = 2AF885FF2466D15100BD50CF /* kill SB.app */;
+			productReference = 2AF885FF2466D15100BD50CF /* kill Process.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -136,12 +140,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF886122466D15D00BD50CF /* LaunchScreen.storyboard in Resources */,
+				2AA4D15A2468F71E003868A7 /* psychicpaper.py in Resources */,
 				2AF8860F2466D15D00BD50CF /* Assets.xcassets in Resources */,
 				2AF8860D2466D15100BD50CF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AA4D1582468F697003868A7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "python ${SRCROOT}/respring/psychicpaper.py\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2AF885FB2466D15100BD50CF /* Sources */ = {
@@ -299,8 +324,8 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.michael.respring;
-				PRODUCT_NAME = "kill SB";
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.killProcess;
+				PRODUCT_NAME = "kill Process";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -317,8 +342,8 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.michael.respring;
-				PRODUCT_NAME = "kill SB";
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.killProcess;
+				PRODUCT_NAME = "kill Process";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

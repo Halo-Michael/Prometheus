@@ -9,7 +9,20 @@
 #import "ViewController.h"
 #import "NSTask.h"
 
-void killall(const char *name) {
+@interface ViewController ()
+
+- (IBAction)kill:(id)sender;
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (IBAction)kill:(id)sender {
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = @"/bin/ps";
     task.arguments = [NSArray arrayWithObjects:
@@ -28,33 +41,41 @@ void killall(const char *name) {
 
     NSMutableArray *listItems = [NSMutableArray array];
     NSString *string = @"";
+    int line = 1, item = 0;
     for (int i = 0; i < printString.length; i++) {
-        if ([printString characterAtIndex:i] != ' ' && [printString characterAtIndex:i] != '\n') {
-            string = [string stringByAppendingFormat:@"%c", [printString characterAtIndex:i]];
+        if ([printString characterAtIndex:i] != ' ' || item == 4) {
+            if ([string isEqualToString:@""]) {
+                item ++;
+            }
+            if ([printString characterAtIndex:i] != '\n') {
+                string = [string stringByAppendingFormat:@"%c", [printString characterAtIndex:i]];
+            } else {
+                if (line > 1) {
+                    [listItems addObject:string];
+                }
+                item = 0;
+                line ++;
+                string = @"";
+            }
         } else if (![string isEqualToString:@""]) {
-            [listItems addObject:string];
+            if (line > 1 && item == 1) {
+                [listItems addObject:string];
+            }
             string = @"";
         }
     }
 
-    if ([listItems containsObject:[NSString stringWithFormat:@"%s", name]]) {
-        kill([[listItems objectAtIndex:[listItems indexOfObject:[NSString stringWithFormat:@"%s", name]] - 3] intValue], SIGKILL);
+    if ([listItems containsObject:[_process text]]) {
+        kill([[listItems objectAtIndex:[listItems indexOfObject:[_process text]] - 1] intValue], SIGKILL);
+    } else {
+        UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
+                                      message:[NSString stringWithFormat:@"No process named \"%@\"!", [_process text]]
+                                      preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+           handler:^(UIAlertAction * action) {}];
+        [error addAction:defaultAction];
+        [self presentViewController:error animated:YES completion:nil];
     }
-    exit(0);
 }
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-    killall("SpringBoard");
-}
-
 
 @end

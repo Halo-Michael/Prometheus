@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2AF885FE2466D15100BD50CF"
-               BuildableName = "kill SB.app"
+               BuildableName = "kill Process.app"
                BlueprintName = "respring"
                ReferencedContainer = "container:respring.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AF885FE2466D15100BD50CF"
-            BuildableName = "kill SB.app"
+            BuildableName = "kill Process.app"
             BlueprintName = "respring"
             ReferencedContainer = "container:respring.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AF885FE2466D15100BD50CF"
-            BuildableName = "kill SB.app"
+            BuildableName = "kill Process.app"
             BlueprintName = "respring"
             ReferencedContainer = "container:respring.xcodeproj">
          </BuildableReference>
