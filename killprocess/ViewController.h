@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *kill;
 @property (weak, nonatomic) IBOutlet UITextField *process;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *choice;
+@property (weak, nonatomic) IBOutlet UITextView *ps;
 
 @end
 

@@ -19,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		2AA4D1592468F71E003868A7 /* psychicpaper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = psychicpaper.py; sourceTree = "<group>"; };
-		2AF885FF2466D15100BD50CF /* kill Process.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kill Process.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AF885FF2466D15100BD50CF /* Kill Process.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kill Process.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF886022466D15100BD50CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2AF886032466D15100BD50CF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2AF886052466D15100BD50CF /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		2AF885F62466D15000BD50CF = {
 			isa = PBXGroup;
 			children = (
-				2AF886012466D15100BD50CF /* respring */,
+				2AF886012466D15100BD50CF /* killprocess */,
 				2AF886002466D15100BD50CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,12 +56,12 @@
 		2AF886002466D15100BD50CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2AF885FF2466D15100BD50CF /* kill Process.app */,
+				2AF885FF2466D15100BD50CF /* Kill Process.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2AF886012466D15100BD50CF /* respring */ = {
+		2AF886012466D15100BD50CF /* killprocess */ = {
 			isa = PBXGroup;
 			children = (
 				2AF886022466D15100BD50CF /* AppDelegate.h */,
@@ -78,15 +78,15 @@
 				2AF8861B2466D1DF00BD50CF /* NSTask.h */,
 				2AA4D1592468F71E003868A7 /* psychicpaper.py */,
 			);
-			path = respring;
+			path = killprocess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2AF885FE2466D15100BD50CF /* respring */ = {
+		2AF885FE2466D15100BD50CF /* killprocess */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2AF886182466D15D00BD50CF /* Build configuration list for PBXNativeTarget "respring" */;
+			buildConfigurationList = 2AF886182466D15D00BD50CF /* Build configuration list for PBXNativeTarget "killprocess" */;
 			buildPhases = (
 				2AF885FB2466D15100BD50CF /* Sources */,
 				2AF885FC2466D15100BD50CF /* Frameworks */,
@@ -97,9 +97,9 @@
 			);
 			dependencies = (
 			);
-			name = respring;
+			name = killprocess;
 			productName = respring;
-			productReference = 2AF885FF2466D15100BD50CF /* kill Process.app */;
+			productReference = 2AF885FF2466D15100BD50CF /* Kill Process.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -116,7 +116,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2AF885FA2466D15100BD50CF /* Build configuration list for PBXProject "respring" */;
+			buildConfigurationList = 2AF885FA2466D15100BD50CF /* Build configuration list for PBXProject "killprocess" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -129,7 +129,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2AF885FE2466D15100BD50CF /* respring */,
+				2AF885FE2466D15100BD50CF /* killprocess */,
 			);
 		};
 /* End PBXProject section */
@@ -164,7 +164,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "python ${SRCROOT}/respring/psychicpaper.py\n";
+			shellScript = "python ${SRCROOT}/killprocess/psychicpaper.py\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -318,14 +318,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = respring/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/killprocess/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michael.killProcess;
-				PRODUCT_NAME = "kill Process";
+				PRODUCT_NAME = "Kill Process";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -336,14 +336,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = respring/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/killprocess/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michael.killProcess;
-				PRODUCT_NAME = "kill Process";
+				PRODUCT_NAME = "Kill Process";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -351,7 +351,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2AF885FA2466D15100BD50CF /* Build configuration list for PBXProject "respring" */ = {
+		2AF885FA2466D15100BD50CF /* Build configuration list for PBXProject "killprocess" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2AF886162466D15D00BD50CF /* Debug */,
@@ -360,7 +360,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2AF886182466D15D00BD50CF /* Build configuration list for PBXNativeTarget "respring" */ = {
+		2AF886182466D15D00BD50CF /* Build configuration list for PBXNativeTarget "killprocess" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2AF886192466D15D00BD50CF /* Debug */,
