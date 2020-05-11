@@ -49,7 +49,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
-                                    <action selector="retuen:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="Loj-GG-a5L"/>
+                                    <action selector="enter:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="U2g-ul-DrQ"/>
                                 </connections>
                             </textField>
                         </subviews>

@@ -9,11 +9,31 @@
 #import "ViewController.h"
 #import "NSTask.h"
 
+bool do_check(const char *num) {
+    if (strcmp(num, "0") == 0) {
+        return true;
+    }
+    const char* p = num;
+    if (*p < '1' || *p > '9') {
+        return false;
+    } else {
+        p++;
+    }
+    while (*p) {
+        if(*p < '0' || *p > '9') {
+            return false;
+        } else {
+            p++;
+        }
+    }
+    return true;
+}
+
 @interface ViewController ()
 
 - (IBAction)kill:(id)sender;
 - (IBAction)change:(id)sender;
-- (IBAction)retuen:(id)sender;
+- (IBAction)enter:(id)sender;
 
 @end
 
@@ -45,15 +65,27 @@
     NSData *data = [file readDataToEndOfFile];
     _ps.text = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
     _process.placeholder = @"process id";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAction:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAction:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (IBAction)kill:(id)sender {
     switch (_choice.selectedSegmentIndex) {
         case 0:
         {
-            if (kill([[_process text] intValue], SIGKILL) < 0) {
+            if (do_check([[_process text] UTF8String]) == true) {
+                if (kill([[_process text] intValue], SIGKILL) < 0) {
+                    UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
+                                                  message:[NSString stringWithFormat:@"You do not have permission to close process \"%@\" or it does not exist!", [_process text]]
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                       handler:^(UIAlertAction * action) {}];
+                    [error addAction:defaultAction];
+                    [self presentViewController:error animated:YES completion:nil];
+                }
+            } else {
                 UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
-                                              message:[NSString stringWithFormat:@"You do not have permission to close process \"%@\" or it does not exist!", [_process text]]
+                                              message:[NSString stringWithFormat:@"Wrong input:\"%@\", the pid of the process is only composed by numbers!", [_process text]]
                                               preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                    handler:^(UIAlertAction * action) {}];
@@ -84,8 +116,7 @@
             NSString *printString = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
 
             NSMutableArray *listItems = [NSMutableArray array];
-            //NSString *string = @"";
-            int line = 1; //item = 0;
+            int line = 1;
             NSString *lastpid = @"", *pid = @"", *name = @"";
 
             for (int i = 0; i < printString.length; i++) {
@@ -163,7 +194,25 @@
     }
 }
 
-- (IBAction)retuen:(id)sender {
+- (IBAction)enter:(id)sender {
+}
+
+- (void)keyboardAction:(NSNotification*)sender {
+    if([sender.name isEqualToString:UIKeyboardWillShowNotification]) {
+        NSDictionary *useInfo = [sender userInfo];
+        NSValue *value = [useInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+        [_ps setContentOffset:CGPointMake([_ps contentOffset].x, [_ps contentOffset].y - [value CGRectValue].origin.y + 561)];
+        _ps.frame = CGRectMake(16, 20, 343, [value CGRectValue].origin.y - 145);
+        _choice.frame = CGRectMake(133, [value CGRectValue].origin.y - 117, 109, 32);
+        _process.frame = CGRectMake(127, [value CGRectValue].origin.y - 78, 120, 34);
+        _kill.frame = CGRectMake(172, [value CGRectValue].origin.y - 37, 30, 30);
+    } else {
+        [_ps setContentOffset:CGPointMake([_ps contentOffset].x, [_ps contentOffset].y + _ps.frame.origin.y - 416)];
+        _ps.frame = CGRectMake(16, 20, 343, 416);
+        _choice.frame = CGRectMake(133, 444, 109, 32);
+        _process.frame = CGRectMake(127, 483, 120, 34);
+        _kill.frame = CGRectMake(172, 524, 30, 30);
+    }
 }
 
 @end
