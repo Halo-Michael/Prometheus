@@ -207,7 +207,7 @@ bool do_check(const char *num) {
         _process.frame = CGRectMake(127, [value CGRectValue].origin.y - 78, 120, 34);
         _kill.frame = CGRectMake(172, [value CGRectValue].origin.y - 37, 30, 30);
     } else {
-        [_ps setContentOffset:CGPointMake([_ps contentOffset].x, [_ps contentOffset].y + _ps.frame.origin.y - 416)];
+        [_ps setContentOffset:CGPointMake([_ps contentOffset].x, [_ps contentOffset].y + _ps.frame.size.height - 416)];
         _ps.frame = CGRectMake(16, 20, 343, 416);
         _choice.frame = CGRectMake(133, 444, 109, 32);
         _process.frame = CGRectMake(127, 483, 120, 34);
