@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2AA4D15A2468F71E003868A7 /* psychicpaper.py in Resources */ = {isa = PBXBuildFile; fileRef = 2AA4D1592468F71E003868A7 /* psychicpaper.py */; };
 		2AF886042466D15100BD50CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF886032466D15100BD50CF /* AppDelegate.m */; };
 		2AF886072466D15100BD50CF /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF886062466D15100BD50CF /* SceneDelegate.m */; };
 		2AF8860A2466D15100BD50CF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF886092466D15100BD50CF /* ViewController.m */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2AA4D1592468F71E003868A7 /* psychicpaper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = psychicpaper.py; sourceTree = "<group>"; };
 		2AF885FF2466D15100BD50CF /* Kill Process.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kill Process.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF886022466D15100BD50CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2AF886032466D15100BD50CF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,7 +74,6 @@
 				2AF886132466D15D00BD50CF /* Info.plist */,
 				2AF886142466D15D00BD50CF /* main.m */,
 				2AF8861B2466D1DF00BD50CF /* NSTask.h */,
-				2AA4D1592468F71E003868A7 /* psychicpaper.py */,
 			);
 			path = killprocess;
 			sourceTree = "<group>";
@@ -140,7 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF886122466D15D00BD50CF /* LaunchScreen.storyboard in Resources */,
-				2AA4D15A2468F71E003868A7 /* psychicpaper.py in Resources */,
 				2AF8860F2466D15D00BD50CF /* Assets.xcassets in Resources */,
 				2AF8860D2466D15100BD50CF /* Main.storyboard in Resources */,
 			);
