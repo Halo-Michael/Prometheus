@@ -159,7 +159,7 @@ bool do_check(const char *num) {
                 }
             }
 
-            if ([listItems containsObject:[_process text]]) {
+            if (![[_process text] isEqualToString:@""] && [listItems containsObject:[_process text]]) {
                 if (kill([[NSString stringWithFormat:@"%lu", [listItems indexOfObject:[_process text]]] intValue], SIGKILL) < 0) {
                     UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
                                                   message:[NSString stringWithFormat:@"You do not have permission to close process \"%@\"!", [_process text]]
