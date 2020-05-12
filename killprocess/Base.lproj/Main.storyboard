@@ -52,6 +52,14 @@
                                     <action selector="enter:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="U2g-ul-DrQ"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIe-b0-H9q">
+                                <rect key="frame" x="275" y="445" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FbW-sb-1So"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -61,6 +69,7 @@
                         <outlet property="kill" destination="cKJ-kZ-fvH" id="J4z-Qq-VUq"/>
                         <outlet property="process" destination="85d-rC-k6v" id="Ufc-DO-wfl"/>
                         <outlet property="ps" destination="6J6-6H-Iha" id="eUR-YI-mdS"/>
+                        <outlet property="refresh" destination="uIe-b0-H9q" id="QOA-oL-EKA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

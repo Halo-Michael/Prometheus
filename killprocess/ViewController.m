@@ -34,6 +34,7 @@ bool do_check(const char *num) {
 - (IBAction)kill:(id)sender;
 - (IBAction)change:(id)sender;
 - (IBAction)enter:(id)sender;
+- (IBAction)refresh:(id)sender;
 
 @end
 
@@ -197,6 +198,31 @@ bool do_check(const char *num) {
 - (IBAction)enter:(id)sender {
 }
 
+- (IBAction)refresh:(id)sender {
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = @"/bin/ps";
+    task.arguments = [NSArray arrayWithObjects:
+                      @"-Aco",
+                      @"user",
+                      @"-o",
+                      @"pid",
+                      @"-o",
+                      @"time",
+                      @"-o",
+                      @"command",
+                      nil];
+    NSPipe *outputPipe = [NSPipe pipe];
+    [task setStandardOutput:outputPipe];
+    NSFileHandle *file = [outputPipe fileHandleForReading];
+    @try {
+        [task launch];
+    } @catch (NSException *exception) {
+        exit(0);
+    }
+    NSData *data = [file readDataToEndOfFile];
+    _ps.text = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
+}
+
 - (void)keyboardAction:(NSNotification*)sender {
     if([sender.name isEqualToString:UIKeyboardWillShowNotification]) {
         NSDictionary *useInfo = [sender userInfo];
@@ -206,12 +232,14 @@ bool do_check(const char *num) {
         _choice.frame = CGRectMake(133, [value CGRectValue].origin.y - 117, 109, 32);
         _process.frame = CGRectMake(127, [value CGRectValue].origin.y - 78, 120, 34);
         _kill.frame = CGRectMake(172, [value CGRectValue].origin.y - 37, 30, 30);
+        _refresh.frame = CGRectMake(275, [value CGRectValue].origin.y - 116, 53, 30);
     } else {
         [_ps setContentOffset:CGPointMake([_ps contentOffset].x, [_ps contentOffset].y + _ps.frame.size.height - 416)];
         _ps.frame = CGRectMake(16, 20, 343, 416);
         _choice.frame = CGRectMake(133, 444, 109, 32);
         _process.frame = CGRectMake(127, 483, 120, 34);
         _kill.frame = CGRectMake(172, 524, 30, 30);
+        _refresh.frame = CGRectMake(275, 445, 53, 30);
     }
 }
 
