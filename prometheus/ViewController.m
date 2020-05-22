@@ -355,7 +355,7 @@ bool do_check(const char *num) {
             arguments = [arguments stringByAppendingFormat:@"%c", [[_terminal text] characterAtIndex:i]];
             i++;
         }
-        
+
         NSTask *task = [[NSTask alloc] init];
         task.launchPath = launchPath;
         if (![arguments isEqualToString:@""]) {
