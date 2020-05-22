@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zc1-jn-uUw">
+                                <rect key="frame" x="0.0" y="58" width="375" height="609"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="bundle id" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lx0-yL-0go">
+                                        <rect key="frame" x="127" y="287" width="120" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="nfChangedEnter:" destination="BYZ-38-t0r" eventType="editingChanged" id="zgc-eO-Lld"/>
+                                            <action selector="nfReturn:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="OfS-cE-dTL"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jer-YF-YaS">
+                                        <rect key="frame" x="172" y="329" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Fix"/>
+                                        <connections>
+                                            <action selector="fix:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eKy-3h-EjI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <viewLayoutGuide key="safeArea" id="DkE-mW-kob"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="6ou-3G-35b">
+                                <rect key="frame" x="0.0" y="58" width="375" height="609"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="process id" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="85d-rC-k6v">
+                                        <rect key="frame" x="127" y="463" width="120" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="kpChangeEnter:" destination="BYZ-38-t0r" eventType="editingChanged" id="8lt-UX-nmC"/>
+                                            <action selector="kpReturn:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="PS2-vz-Y0I"/>
+                                        </connections>
+                                    </textField>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NKk-55-bus">
+                                        <rect key="frame" x="133" y="424" width="109" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="PID"/>
+                                            <segment title="Name"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="change:" destination="BYZ-38-t0r" eventType="valueChanged" id="xav-Yd-DTh"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6J6-6H-Iha">
+                                        <rect key="frame" x="16" y="0.0" width="343" height="416"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKJ-kZ-fvH">
+                                        <rect key="frame" x="172" y="504" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Kill"/>
+                                        <connections>
+                                            <action selector="kill:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MzP-c9-gNk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIe-b0-H9q">
+                                        <rect key="frame" x="275" y="425" width="53" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Refresh"/>
+                                        <connections>
+                                            <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FbW-sb-1So"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <viewLayoutGuide key="safeArea" id="u7u-ea-PpC"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Zfr-mV-1oe">
+                                <rect key="frame" x="30" y="20" width="314" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="safeArea" id="eQv-U8-b0y"/>
+                                <segments>
+                                    <segment title="Kill Progress"/>
+                                    <segment title="Network Fixer"/>
+                                    <segment title="Terminal"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeView:" destination="BYZ-38-t0r" eventType="valueChanged" id="1eQ-pK-QbL"/>
+                                </connections>
+                            </segmentedControl>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PJE-3c-J4g">
+                                <rect key="frame" x="0.0" y="58" width="375" height="609"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dIa-OM-bcB">
+                                        <rect key="frame" x="183" y="0.0" width="10" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E0V-4x-FE8">
+                                        <rect key="frame" x="37" y="422" width="300" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="terminalChangeEnter:" destination="BYZ-38-t0r" eventType="editingChanged" id="djw-ey-2Iu"/>
+                                            <action selector="terminalReturn:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="EQU-py-XEo"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITg-Jd-YM4">
+                                        <rect key="frame" x="172" y="464" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Run"/>
+                                        <connections>
+                                            <action selector="runCommands:" destination="BYZ-38-t0r" eventType="touchUpInside" id="845-LM-VA2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfc-a4-cd5">
+                                        <rect key="frame" x="284" y="464" width="36" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Clear"/>
+                                        <connections>
+                                            <action selector="clearCommands:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kKM-dz-mxe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="bundleid" destination="Lx0-yL-0go" id="zA2-gA-KHS"/>
+                        <outlet property="choice" destination="NKk-55-bus" id="OWw-WA-1KI"/>
+                        <outlet property="clear" destination="Wfc-a4-cd5" id="u73-Gj-0OY"/>
+                        <outlet property="fix" destination="Jer-YF-YaS" id="fr6-Pm-JTU"/>
+                        <outlet property="kill" destination="cKJ-kZ-fvH" id="J4z-Qq-VUq"/>
+                        <outlet property="nfview" destination="Zc1-jn-uUw" id="NYB-VV-O9w"/>
+                        <outlet property="process" destination="85d-rC-k6v" id="Ufc-DO-wfl"/>
+                        <outlet property="ps" destination="6J6-6H-Iha" id="eUR-YI-mdS"/>
+                        <outlet property="psview" destination="6ou-3G-35b" id="bgc-kC-X3d"/>
+                        <outlet property="refresh" destination="uIe-b0-H9q" id="QOA-oL-EKA"/>
+                        <outlet property="run" destination="ITg-Jd-YM4" id="Ue4-8v-AAt"/>
+                        <outlet property="terminal" destination="E0V-4x-FE8" id="Jjx-vd-Ss2"/>
+                        <outlet property="terminalOutput" destination="dIa-OM-bcB" id="MvQ-cP-ae2"/>
+                        <outlet property="terminalView" destination="PJE-3c-J4g" id="MhR-xU-evP"/>
+                        <outlet property="viewControl" destination="Zfr-mV-1oe" id="SUQ-zW-c6r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+</document>

@@ -313,14 +313,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PEP4WNW9L9;
 				INFOPLIST_FILE = "$(SRCROOT)/killprocess/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.michael.killProcess;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.prometheus;
 				PRODUCT_NAME = "Kill Process";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -335,14 +335,14 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PEP4WNW9L9;
 				INFOPLIST_FILE = "$(SRCROOT)/killprocess/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.michael.killProcess;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.prometheus;
 				PRODUCT_NAME = "Kill Process";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

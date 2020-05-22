@@ -8,6 +8,13 @@ evil = '''\t<!---><!-->
 \t<true/>
 \t<key>com.apple.private.security.no-container</key>
 \t<true/>
+\t<key>com.apple.CommCenter.fine-grained</key>
+\t<array>
+\t\t<string>cellular-plan</string>
+\t\t<string>data-usage</string>
+\t\t<string>data-allowed-write</string>
+\t\t<string>preferences-write</string>
+\t</array>
 \t<!-- -->
 '''
 
