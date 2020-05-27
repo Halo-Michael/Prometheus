@@ -310,7 +310,7 @@ bool do_check(const char *num) {
                 preferredStyle:UIAlertControllerStyleAlert];
                 continue;
             }
-            result = ((BOOL (*)(Class, SEL, NSNumber *, NSString *, id))objc_msgSend)(AppWirelessDataUsageManager, NSSelectorFromString(@"setAppWirelessDataOption:forBundleIdentifier:completionHandler:"), [NSNumber numberWithInt:1], exampleBundleid, nil);
+            result = ((BOOL (*)(Class, SEL, NSNumber *, NSString *, id))objc_msgSend)(AppWirelessDataUsageManager, NSSelectorFromString(@"setAppCellularDataEnabled:forBundleIdentifier:completionHandler:"), [NSNumber numberWithInt:1], exampleBundleid, nil);
             if (!result) {
                 message = [UIAlertController alertControllerWithTitle:@"Failed!"
                 message:[NSString stringWithFormat:@"Fail to enable network for %s.", [exampleBundleid UTF8String]]
