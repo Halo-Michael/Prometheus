@@ -67,9 +67,7 @@ bool do_check(const char *num) {
     // Do any additional setup after loading the view.
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = @"/bin/ps";
-    task.arguments = [NSArray arrayWithObjects:
-                      @"-Aco user pid time command",
-                      nil];
+    task.arguments = [NSArray arrayWithObjects:@"-Aco user pid time command", nil];
     NSPipe *outputPipe = [NSPipe pipe];
     [task setStandardOutput:outputPipe];
     NSFileHandle *file = [outputPipe fileHandleForReading];
@@ -107,110 +105,86 @@ bool do_check(const char *num) {
 - (IBAction)kill:(id)sender {
     switch (_choice.selectedSegmentIndex) {
         case 0:
-        {
-            if (do_check([[_process text] UTF8String]) == true) {
-                if (kill([[_process text] intValue], SIGKILL) < 0) {
-                    UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
-                                                  message:[NSString stringWithFormat:@"You do not have permission to close process \"%@\" or it does not exist!", [_process text]]
-                                                  preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                       handler:^(UIAlertAction * action) {}];
+            {
+                if (do_check([[_process text] UTF8String]) == true) {
+                    if (kill([[_process text] intValue], SIGKILL) < 0) {
+                        UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!" message:[NSString stringWithFormat:@"You do not have permission to close process \"%@\" or it does not exist!", [_process text]] preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+                        [error addAction:defaultAction];
+                        [self presentViewController:error animated:YES completion:nil];
+                    }
+                } else {
+                    UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!" message:[NSString stringWithFormat:@"Wrong input:\"%@\", the pid of the process is only composed by numbers!", [_process text]] preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
                     [error addAction:defaultAction];
                     [self presentViewController:error animated:YES completion:nil];
                 }
-            } else {
-                UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
-                                              message:[NSString stringWithFormat:@"Wrong input:\"%@\", the pid of the process is only composed by numbers!", [_process text]]
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                   handler:^(UIAlertAction * action) {}];
-                [error addAction:defaultAction];
-                [self presentViewController:error animated:YES completion:nil];
             }
-        }
             break;
         case 1:
-        {
-            NSTask *task = [[NSTask alloc] init];
-            task.launchPath = @"/bin/ps";
-            task.arguments = [NSArray arrayWithObjects:
-                              @"-Aco pid command",
-                              nil];
-            NSPipe *outputPipe = [NSPipe pipe];
-            [task setStandardOutput:outputPipe];
-            NSFileHandle *file = [outputPipe fileHandleForReading];
-            @try {
-                [task launch];
-            } @catch (NSException *exception) {
-                exit(0);
-            }
-            NSData *data = [file readDataToEndOfFile];
-            NSString *printString = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
-
-            NSMutableArray *listItems = [NSMutableArray array];
-            int line = 1;
-            NSString *lastpid = @"", *pid = @"", *name = @"";
-
-            for (int i = 0; i < printString.length; i++) {
-                while ([printString characterAtIndex:i] != '\n') {
-                    while ([printString characterAtIndex:i] == ' ') {
-                        i++;
-                    }
-                    while ([printString characterAtIndex:i] != ' ') {
-                        pid = [pid stringByAppendingFormat:@"%c", [printString characterAtIndex:i]];
-                        i++;
-                    }
-                    while ([printString characterAtIndex:i] == ' ') {
-                        i++;
-                    }
-                    while ([printString characterAtIndex:i] != '\n') {
-                        if ([printString characterAtIndex:i] != '(' && [printString characterAtIndex:i] != ')') {
-                            name = [name stringByAppendingFormat:@"%c", [printString characterAtIndex:i]];
-                        }
-                        i++;
-                    }
-                    if (line > 1) {
-                        if ([lastpid isEqualToString:@""]) {
-                            [listItems addObject:@""];
-                            [listItems addObject:name];
-                            name = @"";
-                        } else {
-                            for (int j = [lastpid intValue] + 1; j < [pid intValue]; j++) {
-                                [listItems addObject:@""];
-                            }
-                            [listItems addObject:name];
-                            name = @"";
-                        }
-                        lastpid = pid;
-                        pid = @"";
-                    } else {
-                        pid = @"";
-                        name = @"";
-                    }
-                    line ++;
+            {
+                NSTask *task = [[NSTask alloc] init];
+                task.launchPath = @"/bin/ps";
+                task.arguments = [NSArray arrayWithObjects:@"-Aco pid command", nil];
+                NSPipe *outputPipe = [NSPipe pipe];
+                [task setStandardOutput:outputPipe];
+                NSFileHandle *file = [outputPipe fileHandleForReading];
+                @try {
+                    [task launch];
+                } @catch (NSException *exception) {
+                    exit(0);
                 }
-            }
+                NSData *data = [file readDataToEndOfFile];
+                NSString *printString = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
 
-            if (![[_process text] isEqualToString:@""] && [listItems containsObject:[_process text]]) {
-                if (kill([[NSString stringWithFormat:@"%lu", [listItems indexOfObject:[_process text]]] intValue], SIGKILL) < 0) {
-                    UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
-                                                  message:[NSString stringWithFormat:@"You do not have permission to close process \"%@\"!", [_process text]]
-                                                  preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                       handler:^(UIAlertAction * action) {}];
+                NSMutableDictionary *ps = [NSMutableDictionary dictionary];
+                for (int i = 0; i < [printString length]; i++) {
+                    while ([printString characterAtIndex:i] != '\n') {
+                        NSMutableString *name = [[NSMutableString alloc] init];
+                        NSMutableString *pid = [[NSMutableString alloc] init];
+                        while ([printString characterAtIndex:i] == ' ') {
+                            i++;
+                        }
+                        while ([printString characterAtIndex:i] != ' ') {
+                            [pid appendFormat:@"%c", [printString characterAtIndex:i]];
+                            i++;
+                        }
+                        while ([printString characterAtIndex:i] == ' ') {
+                            i++;
+                        }
+                        while ([printString characterAtIndex:i] != '\n') {
+                            if ([printString characterAtIndex:i] != '(' && [printString characterAtIndex:i] != ')') {
+                                [name appendFormat:@"%c", [printString characterAtIndex:i]];
+                            }
+                            i++;
+                        }
+                        if (do_check([pid UTF8String])) {
+                            NSMutableArray *pids = [NSMutableArray array];
+                            if (ps[name] != nil) {
+                                pids = ps[name];
+                            }
+                            [pids addObject:pid];
+                            ps[name] = pids;
+                        }
+                    }
+                }
+
+                if (![[_process text] isEqualToString:@""] && ps[[_process text]] != nil) {
+                    for (NSString *pid in ps[[_process text]]) {
+                        if (kill([pid intValue], SIGKILL) < 0) {
+                            UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!" message:[NSString stringWithFormat:@"You do not have permission to close process \"%@\"!", [_process text]] preferredStyle:UIAlertControllerStyleAlert];
+                            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+                            [error addAction:defaultAction];
+                            [self presentViewController:error animated:YES completion:nil];
+                        }
+                    }
+                } else {
+                    UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!" message:[NSString stringWithFormat:@"No process named \"%@\"!", [_process text]] preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
                     [error addAction:defaultAction];
                     [self presentViewController:error animated:YES completion:nil];
                 }
-            } else {
-                UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
-                                              message:[NSString stringWithFormat:@"No process named \"%@\"!", [_process text]]
-                                              preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                   handler:^(UIAlertAction * action) {}];
-                [error addAction:defaultAction];
-                [self presentViewController:error animated:YES completion:nil];
             }
-        }
             break;
     }
 }
@@ -240,9 +214,7 @@ bool do_check(const char *num) {
 - (IBAction)refresh:(id)sender {
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = @"/bin/ps";
-    task.arguments = [NSArray arrayWithObjects:
-                      @"-Aco user pid time command",
-                      nil];
+    task.arguments = [NSArray arrayWithObjects:@"-Aco user pid time command", nil];
     NSPipe *outputPipe = [NSPipe pipe];
     [task setStandardOutput:outputPipe];
     NSFileHandle *file = [outputPipe fileHandleForReading];
@@ -275,11 +247,8 @@ bool do_check(const char *num) {
     }
 
     if (![bundle load]) {
-        UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
-                                      message:[NSString stringWithFormat:@"iOS version too low, 11.0 or higher required!"]
-                                      preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-           handler:^(UIAlertAction * action) {}];
+        UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!" message:[NSString stringWithFormat:@"iOS version too low, 11.0 or higher required!"] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         [error addAction:defaultAction];
         [self presentViewController:error animated:YES completion:nil];
         return;
@@ -293,36 +262,25 @@ bool do_check(const char *num) {
 
             BOOL result = ((BOOL (*)(id, SEL, NSString *, BOOL, BOOL))objc_msgSend)(cacheInstance, NSSelectorFromString(@"setUsagePoliciesForBundle:cellular:wifi:"), exampleBundleid, true, true);
             if (!result) {
-                message = [UIAlertController alertControllerWithTitle:@"Failed!"
-                message:[NSString stringWithFormat:@"Fail to enable network for %s.", [exampleBundleid UTF8String]]
-                preferredStyle:UIAlertControllerStyleAlert];
+                message = [UIAlertController alertControllerWithTitle:@"Failed!" message:[NSString stringWithFormat:@"Fail to enable network for %s.", [exampleBundleid UTF8String]] preferredStyle:UIAlertControllerStyleAlert];
             } else {
-                message = [UIAlertController alertControllerWithTitle:@"Success!"
-                message:[NSString stringWithFormat:@"Enable network for %s successfully.", [exampleBundleid UTF8String]]
-                preferredStyle:UIAlertControllerStyleAlert];
+                message = [UIAlertController alertControllerWithTitle:@"Success!" message:[NSString stringWithFormat:@"Enable network for %s successfully.", [exampleBundleid UTF8String]] preferredStyle:UIAlertControllerStyleAlert];
             }
         } else {
             Class AppWirelessDataUsageManager = NSClassFromString(@"AppWirelessDataUsageManager");
             BOOL result = ((BOOL (*)(Class, SEL, NSNumber *, NSString *, id))objc_msgSend)(AppWirelessDataUsageManager, NSSelectorFromString(@"setAppWirelessDataOption:forBundleIdentifier:completionHandler:"), [NSNumber numberWithInt:3], exampleBundleid, nil);
             if (!result) {
-                message = [UIAlertController alertControllerWithTitle:@"Failed!"
-                message:[NSString stringWithFormat:@"Fail to enable network for %s.", [exampleBundleid UTF8String]]
-                preferredStyle:UIAlertControllerStyleAlert];
+                message = [UIAlertController alertControllerWithTitle:@"Failed!" message:[NSString stringWithFormat:@"Fail to enable network for %s.", [exampleBundleid UTF8String]] preferredStyle:UIAlertControllerStyleAlert];
                 continue;
             }
             result = ((BOOL (*)(Class, SEL, NSNumber *, NSString *, id))objc_msgSend)(AppWirelessDataUsageManager, NSSelectorFromString(@"setAppCellularDataEnabled:forBundleIdentifier:completionHandler:"), [NSNumber numberWithInt:1], exampleBundleid, nil);
             if (!result) {
-                message = [UIAlertController alertControllerWithTitle:@"Failed!"
-                message:[NSString stringWithFormat:@"Fail to enable network for %s.", [exampleBundleid UTF8String]]
-                preferredStyle:UIAlertControllerStyleAlert];
+                message = [UIAlertController alertControllerWithTitle:@"Failed!" message:[NSString stringWithFormat:@"Fail to enable network for %s.", [exampleBundleid UTF8String]] preferredStyle:UIAlertControllerStyleAlert];
             } else {
-                message = [UIAlertController alertControllerWithTitle:@"Success!"
-                message:[NSString stringWithFormat:@"Enable network for %s successfully.", [exampleBundleid UTF8String]]
-                preferredStyle:UIAlertControllerStyleAlert];
+                message = [UIAlertController alertControllerWithTitle:@"Success!" message:[NSString stringWithFormat:@"Enable network for %s successfully.", [exampleBundleid UTF8String]] preferredStyle:UIAlertControllerStyleAlert];
             }
         }
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-           handler:^(UIAlertAction * action) {}];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
         [message addAction:defaultAction];
         [self presentViewController:message animated:YES completion:nil];
     }
@@ -359,9 +317,7 @@ bool do_check(const char *num) {
         NSTask *task = [[NSTask alloc] init];
         task.launchPath = launchPath;
         if (![arguments isEqualToString:@""]) {
-            task.arguments = [NSArray arrayWithObjects:
-            arguments,
-            nil];
+            task.arguments = [NSArray arrayWithObjects:arguments, nil];
         }
         NSPipe *outputPipe = [NSPipe pipe];
         [task setStandardOutput:outputPipe];
@@ -369,11 +325,8 @@ bool do_check(const char *num) {
         @try {
             [task launch];
         } @catch (NSException *exception) {
-            UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!"
-                                          message:[NSString stringWithFormat:@"Command \"%@\" not found, missing path or binary does not exist.", launchPath]
-                                          preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-               handler:^(UIAlertAction * action) {}];
+            UIAlertController *error = [UIAlertController alertControllerWithTitle:@"Error!" message:[NSString stringWithFormat:@"Command \"%@\" not found, missing path or binary does not exist.", launchPath] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
             [error addAction:defaultAction];
             [self presentViewController:error animated:YES completion:nil];
             return;
